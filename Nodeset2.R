@@ -26,9 +26,6 @@ makeAccountsDataFrameOldver <- function( fullFileName ){
             columnValue <- append(columnValue,strsplit(column[j,],"\n"))
           }
         }
-        if( is.na(match("sign", names(columnValue))) ){
-          columnValue <- append(columnValue,list(sign=c('')))        
-        }
         columnValue <- append(columnValue,list(value=c(as.numeric(value))))
         accountsDf <- rbind(accountsDf,as.data.frame.list(columnValue,stringsAsFactors = FALSE))
       }
