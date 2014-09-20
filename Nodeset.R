@@ -6,17 +6,9 @@ fileNameBS <- "0101010-acbs01-tse-acedjpfr-67560-2014-03-31-01-2014-04-24-ixbrl.
 fileNamePL <- "0102010-acpl01-tse-acedjpfr-67560-2014-03-31-01-2014-04-24-ixbrl.htm"
 fileNameCF <- "0104010-accf01-tse-acedjpfr-67560-2014-03-31-01-2014-04-24-ixbrl.htm"
 
-fileAttrs <- strsplit(fileNameCF,"-")
-
-fullFileName <- paste(workDir,fileNamePL,sep="")
-doc <- xmlInternalTreeParse(fullFileName,useInternalNodes = TRUE)
-xmlData <- xmlRoot(doc)
-
-accountsDf <- data.frame()
-for( i in seq_along(accountsTitle$element)){
-  item <- paste(accountsTitle$prefix[i],':',accountsTitle$element[i],sep="")  
-
-  context <- paste("//*[@name='",item,"' and @contextRef='CurrentYearDuration' and not(@xsi:nil) ]",sep="")
+instanceFileParser <- function(fullFileName){
+  
+  fileAttrs <- strsplit(fileName,"-")
   
   column <- xpathSApply(xmlData,context,xmlAttrs)
   
